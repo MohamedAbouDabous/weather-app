@@ -6,17 +6,27 @@ import axios from 'axios';
 class App extends Component {
 
   state = {
-    long: '',
-    lat: ''
+    windGust: [ ],
+    humidity: [ ],
+    timezone: [ ]
   }
-  
-  componentDidMount() {
 
+  componentDidMount() {
+    
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/${position.coords.latitude},${position.coords.longitude}`)
-      .then(json => console.log(json))
+      navigator.geolocation.getCurrentPosition(position => 
+        {axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/${position.coords.latitude},${position.coords.longitude}`)
+      .then(res => {
+        this.setState ({
+
+          windGust: res.data.currently.windGust,
+          humidity: res.data.currently.humidity,
+          timezone: res.data.timezone
+          })
+          console.log(res);
+        })
+      })
     }
-      )}
   }
 
   // componentDidMount(){
@@ -56,9 +66,12 @@ class App extends Component {
     
   
   render() {
+    const { windGust, humidity, timezone } = this.state;
     return (
       <div className="App">
-        
+        <div>{timezone}</div>
+        <div>{windGust}</div>
+        <div>{humidity}</div>
       </div>
     );
   }
