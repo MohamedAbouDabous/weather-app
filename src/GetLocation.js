@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TestWeekWeather from './testWeekWeather';
+import HourlyWeather from './HourlyWeather';
 
 class getLocation extends Component{
     state = {
@@ -51,6 +52,8 @@ class getLocation extends Component{
             </div>
             <TestWeekWeather weekWeather = 
             {this.state.weekWeather} />
+            <HourlyWeather HourlyWeather = 
+            {this.state.Hourly} />
             </div>
 
         )
