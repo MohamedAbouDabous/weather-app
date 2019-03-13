@@ -12,3 +12,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.headerBar {
+  border-color: blue;
+  text-align: center;
+}
+
+.border {
+  border-style: solid;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.outerBorder {
+  align-content:  center;
+}
+
+.weekIndex {
+  display: flex;
+  flex-direction: row;
+}
+
+/* .weekWeather {
+  display: flex;
+  flex-direction: row;
+} */
