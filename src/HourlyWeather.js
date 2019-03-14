@@ -7,7 +7,7 @@ export default class HourlyWeather extends Component {
     const hourlyWeathers = hourlyWeather.map((hour, index) =>
         <ul className="weekIndex" key={index}>
             <li>
-                {new Date(hour.time * 1000).toLocaleDateString('it-IT')}
+                {new Date(hour.time * 1000).toLocaleString('it-IT')}
             </li>
         </ul> 
     )

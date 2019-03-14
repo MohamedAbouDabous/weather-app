@@ -26,7 +26,7 @@ class getLocation extends Component{
           timezone: res.data.timezone,
           Celsius : res.data.currently.temperature,
           weekWeather: res.data.daily.data.slice(0,5),
-          Hourly: res.data.hourly.data
+          Hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0)
 
           })
           console.log(this.state);
