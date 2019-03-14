@@ -9,24 +9,44 @@ class getLocation extends Component{
     humidity: [ ],
     timezone: [ ],
     weekWeather: [ ],
-    Celsius: [ ],
-    Hourly: [ ]
+    temperature: [ ],
+    hourly: [ ],
+    isCelsius: true
   }
 
   componentDidMount = () => {
+    this.toggleTemp()
+  }
+
+  toggleTemp = () => {
     
+    console.log(this.state.isCelsius)
+    this.setState(prevState => ({
+      isCelsius: !prevState.isCelsius
+    }))
+    console.log(this.state.isCelsius)
+ 
+    let tempApi
+    
+    if (this.state.isCelsius) {
+      tempApi = "?units=si"
+    } else {
+      tempApi = ""
+    }
+
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => 
-        {axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/${position.coords.latitude},${position.coords.longitude}?units=si`)
+      navigator.geolocation.getCurrentPosition(position => {
+          axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/${position.coords.latitude},${position.coords.longitude}${tempApi}`)
       .then(res => {
         this.setState ({
 
           windGust: res.data.currently.windGust,
           humidity: res.data.currently.humidity,
           timezone: res.data.timezone,
-          Celsius : res.data.currently.temperature,
+          temperature : res.data.currently.temperature,
           weekWeather: res.data.daily.data.slice(0,5),
-          Hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0)
+          hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0)
+
 
           })
           console.log(this.state);
@@ -36,8 +56,9 @@ class getLocation extends Component{
     }
   }
 
+
     render(){
-        const { windGust, humidity, timezone, Celsius } = this.state;
+        const { windGust, humidity, timezone, temperature } = this.state;
         
         return (
             
@@ -47,13 +68,15 @@ class getLocation extends Component{
             <div>Tidszon: {timezone}</div>
             <div>Vindstyrka: {windGust} km/h</div>
             <div>Luftfuktighet: {humidity}</div>
-            <div>Temperatur: {Celsius} Celsius</div>
+            <div>Temperatur: {temperature} Celsius</div>
             </div>
             </div>
+            <button onClick={this.toggleTemp}>Toggle</button>
             <TestWeekWeather weekWeather = 
             {this.state.weekWeather} />
-            <HourlyWeather HourlyWeather = 
-            {this.state.Hourly} />
+            <HourlyWeather hourlyWeather = 
+            {this.state.hourly} />
+
             </div>
 
         )

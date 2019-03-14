@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class HourlyWeather extends Component {
   render() {
 
-    const hourlyWeather = this.props.HourlyWeather
+    const hourlyWeather = this.props.hourlyWeather
     const hourlyWeathers = hourlyWeather.map((hour, index) =>
         <ul className="weekIndex" key={index}>
             <li>
