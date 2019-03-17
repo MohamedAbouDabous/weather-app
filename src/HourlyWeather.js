@@ -8,6 +8,8 @@ export default class HourlyWeather extends Component {
         <ul className="weekIndex" key={index}>
             <li>
                 {new Date(hour.time * 1000).toLocaleString('it-IT')}
+                <p></p>
+                {hour.temperature}
             </li>
         </ul> 
     )

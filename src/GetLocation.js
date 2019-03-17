@@ -20,11 +20,10 @@ class getLocation extends Component{
 
   toggleTemp = () => {
     
-    console.log(this.state.isCelsius)
+
     this.setState(prevState => ({
       isCelsius: !prevState.isCelsius
     }))
-    console.log(this.state.isCelsius)
  
     let tempApi
     
@@ -33,6 +32,8 @@ class getLocation extends Component{
     } else {
       tempApi = ""
     }
+
+    
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -65,13 +66,14 @@ class getLocation extends Component{
             <div className="outerBorder">
             <div className="border">
             <div className="getLocation">
+            <button onClick={this.toggleTemp}>Fahrenheit/Celcius</button>
             <div>Tidszon: {timezone}</div>
             <div>Vindstyrka: {windGust} km/h</div>
             <div>Luftfuktighet: {humidity}</div>
             <div>Temperatur: {temperature} Celsius</div>
             </div>
             </div>
-            <button onClick={this.toggleTemp}>Toggle</button>
+            
             <TestWeekWeather weekWeather = 
             {this.state.weekWeather} />
             <HourlyWeather hourlyWeather = 

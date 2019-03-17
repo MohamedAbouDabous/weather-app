@@ -9,6 +9,10 @@ export default class testWeekWeather extends Component {
         
         <ul className="weekIndex" key={index}>
             <li>{new Date(week.time * 1000).toDateString('it-IT')}</li>
+            <p></p>
+            {week.apparentTemperatureHigh}
+            <p></p>
+            {week.apparentTemperatureLow}
         </ul>
     
 )

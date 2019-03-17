@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: aquamarine;
 }
 
 code {
@@ -29,10 +30,10 @@ code {
   align-content:  center;
 }
 
-.weekIndex {
+/* .weekIndex {
   display: flex;
   flex-direction: row;
-}
+} */
 
 /* .weekWeather {
   display: flex;
