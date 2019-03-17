@@ -8,11 +8,11 @@ export default class testWeekWeather extends Component {
     const weeklyWeather = weekWeather.map((week, index) =>
         
         <ul className="weekIndex" key={index}>
-            <li>{new Date(week.time * 1000).toDateString('it-IT')}</li>
+            <h4><li>{new Date(week.time * 1000).toDateString('it-IT')}</li></h4>
             <p></p>
-            {week.apparentTemperatureHigh}
+            <h6>Max temperature-Celsius/Fahrenheit:  {week.apparentTemperatureHigh}</h6>
             <p></p>
-            {week.apparentTemperatureLow}
+            <h6>Lowest temperature-Celsius/Fahrenheit: {week.apparentTemperatureLow}</h6>
         </ul>
     
 )

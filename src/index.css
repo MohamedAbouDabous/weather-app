@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: aquamarine;
+  background-color: lightcyan;
 }
 
 code {
@@ -20,9 +20,8 @@ code {
 }
 
 .border {
-  border-style: solid;
   text-align: center;
-  width: 50%;
+  width: 30%;
   margin: 0 auto;
 }
 
@@ -30,10 +29,10 @@ code {
   align-content:  center;
 }
 
-/* .weekIndex {
-  display: flex;
-  flex-direction: row;
-} */
+.weekIndex {
+  border: solid black;
+  align-content: row;
+}
 
 /* .weekWeather {
   display: flex;

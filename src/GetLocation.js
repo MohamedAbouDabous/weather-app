@@ -11,6 +11,8 @@ class getLocation extends Component{
     weekWeather: [ ],
     temperature: [ ],
     hourly: [ ],
+    sunriseTime: [ ],
+    sunsetTime: [ ],
     isCelsius: true
   }
 
@@ -46,11 +48,13 @@ class getLocation extends Component{
           timezone: res.data.timezone,
           temperature : res.data.currently.temperature,
           weekWeather: res.data.daily.data.slice(0,5),
-          hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0)
+          hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0),
+          sunriseTime: res.data.daily.data[0].sunriseTime,
+          sunsetTime: res.data.daily.data[0].sunsetTime
+          
 
 
           })
-          console.log(this.state);
           console.log(res);
         })
       })
@@ -59,18 +63,26 @@ class getLocation extends Component{
 
 
     render(){
-        const { windGust, humidity, timezone, temperature } = this.state;
+        const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTime } = this.state;
         
         return (
             
             <div className="outerBorder">
             <div className="border">
             <div className="getLocation">
-            <button onClick={this.toggleTemp}>Fahrenheit/Celcius</button>
+            <button onClick={this.toggleTemp}>Celsius/Fahrenheit</button>
+            <p></p>
             <div>Tidszon: {timezone}</div>
-            <div>Vindstyrka: {windGust} km/h</div>
-            <div>Luftfuktighet: {humidity}</div>
-            <div>Temperatur: {temperature} Celsius</div>
+            <p></p>
+            <div>Vindstyrka: {windGust} Km/Miles</div>
+            <p></p>
+            <div>Luftfuktighet: {humidity}%</div>
+            <p></p>
+            <div>Temperatur: {temperature} Celsius/Fahrenheit</div>
+            <p></p>
+            <div>Soluppgång: {new Date(sunriseTime * 1000).toLocaleString('it-IT')} </div>
+            <p></p>
+            <div>Solnedgång: {new Date(sunsetTime * 1000).toLocaleString('it-IT')} </div>
             </div>
             </div>
             
