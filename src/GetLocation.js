@@ -35,9 +35,9 @@ class getLocation extends Component{
       tempApi = ""
     }
 
-    
+    let currentState = this;
 
-    if (navigator.geolocation) {
+    
       navigator.geolocation.getCurrentPosition(position => {
           axios.get(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/${position.coords.latitude},${position.coords.longitude}${tempApi}`)
       .then(res => {
@@ -48,18 +48,55 @@ class getLocation extends Component{
           timezone: res.data.timezone,
           temperature : res.data.currently.temperature,
           weekWeather: res.data.daily.data.slice(0,5),
-          hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0),
+          hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0).slice(0,9),
           sunriseTime: res.data.daily.data[0].sunriseTime,
           sunsetTime: res.data.daily.data[0].sunsetTime
           
 
 
           })
-          console.log(res);
+          // console.log(res);
         })
+      },
+  
+  function(error) {
+    if (error.code === error.PERMISSION_DENIED)
+    axios.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/59.33469469999999,18.0523636/?units=si')
+    .then(res => {
+      currentState.setState ({
+        windGust: res.data.currently.windGust,
+        humidity: res.data.currently.humidity,
+        timezone: res.data.timezone,
+        temperature : res.data.currently.temperature,
+        weekWeather: res.data.daily.data.slice(0,5),
+        hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0).slice(0,9),
+        sunriseTime: res.data.daily.data[0].sunriseTime,
+        sunsetTime: res.data.daily.data[0].sunsetTime
       })
-    }
+          alert(
+            'Med tanke på att du inte låter oss läsa av din position så är vår standard inställd på Stockholm'
+          )
+      console.log(res);
+    })
+
+
+
+
   }
+)}
+  
+  
+  
+  // else {
+      
+    //     axios.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/59.33469469999999,18.0523636/?units=si')
+    // .then(res => {
+    //   this.setState ({
+    //   windGust: res.data.currently.windGust,
+    //   })
+    // })
+  
+
 
 
     render(){
