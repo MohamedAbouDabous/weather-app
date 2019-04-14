@@ -78,23 +78,8 @@ class getLocation extends Component{
           )
       console.log(res);
     })
-
-
-
-
   }
 )}
-  
-  
-  
-  // else {
-      
-    //     axios.get('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/93ce24f5d5831a1b6eb47d04de207dda/59.33469469999999,18.0523636/?units=si')
-    // .then(res => {
-    //   this.setState ({
-    //   windGust: res.data.currently.windGust,
-    //   })
-    // })
   
 
 
