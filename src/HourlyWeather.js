@@ -6,19 +6,15 @@ export default class HourlyWeather extends Component {
     const hourlyWeather = this.props.hourlyWeather
     const hourlyWeathers = hourlyWeather.map((hour, index) =>
         <ul className="weekIndex" key={index}>
-            <li>
-                <h4>{new Date(hour.time * 1000).toLocaleString('it-IT')}</h4>
-                <p></p>
-                <h6>Celcius/Fahrenheit: {hour.temperature}</h6>
-            </li>
-        </ul> 
+          <h4>{new Date(hour.time * 1000).toLocaleString('it-IT')}</h4>
+          <p></p>
+          <h6>Celcius/Fahrenheit: {hour.temperature}</h6>
+        </ul>
     )
     return (
-      <div>
-         <div>
+         <div className="hourBorder">
              {hourlyWeathers}
          </div>
-      </div>
     )
   }
 }

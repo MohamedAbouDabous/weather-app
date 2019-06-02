@@ -1,4 +1,11 @@
 body {
+
+ /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c3d9ff+0,b1c8ef+41,98b0d9+100;Lavender+3D */
+background: rgb(195,217,255); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(195,217,255,1) 0%, rgba(177,200,239,1) 41%, rgba(152,176,217,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(195,217,255,1) 0%,rgba(177,200,239,1) 41%,rgba(152,176,217,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(195,217,255,1) 0%,rgba(177,200,239,1) 41%,rgba(152,176,217,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c3d9ff', endColorstr='#98b0d9',GradientType=0 ); /* IE6-9 */
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -6,7 +13,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightcyan;
+  background-color: coral;
+}
+
+.header {
+  text-align: center;
+  font-size: 50px;
+  font-family: "Times New Roman", Times, serif;
+  margin: 2%;
 }
 
 code {
@@ -14,27 +28,31 @@ code {
     monospace;
 }
 
-.headerBar {
-  border-color: blue;
-  text-align: center;
-}
-
 .border {
+  line-height: 2;
   text-align: center;
-  width: 30%;
-  margin: 0 auto;
+  font-family: "Times New Roman", Times, serif;
+  padding: 1%;
 }
 
-.outerBorder {
-  align-content:  center;
+.weekBorder {
+  display: grid;
+  /* grid-template-columns: auto auto auto; */
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-gap: 30px;
 }
 
 .weekIndex {
-  border: solid black;
-  align-content: row;
+  border: 1px solid;
+  /* width: 70%; */
+  display: flex;
+  flex-flow: column;
+  text-align: center; 
+  
 }
 
-/* .weekWeather {
-  display: flex;
-  flex-direction: row;
-} */
+.hourBorder {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-gap: 30px;
+}

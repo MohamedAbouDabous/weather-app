@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import axios from 'axios';
 import TestWeekWeather from './testWeekWeather';
 import HourlyWeather from './HourlyWeather';
@@ -8,12 +8,12 @@ class getLocation extends Component{
     windGust: [ ],
     humidity: [ ],
     timezone: [ ],
-    weekWeather: [ ],
+    weekly: [ ],
     temperature: [ ],
     hourly: [ ],
     sunriseTime: [ ],
     sunsetTime: [ ],
-    isCelsius: true
+    isCelsius: true,
   }
 
   componentDidMount = () => {
@@ -24,17 +24,24 @@ class getLocation extends Component{
     
 
     this.setState(prevState => ({
-      isCelsius: !prevState.isCelsius
+      isCelsius: !prevState.isCelsius,
     }))
- 
-    let tempApi
     
-    if (this.state.isCelsius) {
-      tempApi = "?units=si"
-    } else {
-      tempApi = ""
-    }
+    let tempApi
+    let speed
+    let temp
 
+
+    if (this.state.isCelsius) {
+      speed = "m/s"
+      tempApi = "?units=si"
+      temp = "C"
+    } else {
+      temp = "F"
+      tempApi = ""
+      speed = "mph"
+    }
+    
     let currentState = this;
 
     
@@ -47,15 +54,15 @@ class getLocation extends Component{
           humidity: res.data.currently.humidity,
           timezone: res.data.timezone,
           temperature : res.data.currently.temperature,
-          weekWeather: res.data.daily.data.slice(0,5),
+          weekly: res.data.daily.data.slice(0,5),
           hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0).slice(0,9),
           sunriseTime: res.data.daily.data[0].sunriseTime,
-          sunsetTime: res.data.daily.data[0].sunsetTime
-          
+          sunsetTime: res.data.daily.data[0].sunsetTime,
+          speed: speed,
+          temp: temp
 
 
           })
-          // console.log(res);
         })
       },
   
@@ -68,7 +75,7 @@ class getLocation extends Component{
         humidity: res.data.currently.humidity,
         timezone: res.data.timezone,
         temperature : res.data.currently.temperature,
-        weekWeather: res.data.daily.data.slice(0,5),
+        weekly: res.data.daily.data.slice(0,5),
         hourly: res.data.hourly.data.filter((_,i) => i % 3 === 0).slice(0,9),
         sunriseTime: res.data.daily.data[0].sunriseTime,
         sunsetTime: res.data.daily.data[0].sunsetTime
@@ -80,38 +87,34 @@ class getLocation extends Component{
     })
   }
 )}
-  
-
-
 
     render(){
-        const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTime } = this.state;
+        const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTime, speed, temp, hourly, weekly } = this.state;
         
+        const { toggleTemp } = this;
+
         return (
             
-            <div className="outerBorder">
+            <div>
+            <div className="header">Weather in {timezone}</div>
             <div className="border">
-            <div className="getLocation">
-            <button onClick={this.toggleTemp}>Celsius/Fahrenheit</button>
-            <p></p>
-            <div>Tidszon: {timezone}</div>
-            <p></p>
-            <div>Vindstyrka: {windGust} Km/Miles</div>
-            <p></p>
-            <div>Luftfuktighet: {humidity}%</div>
-            <p></p>
-            <div>Temperatur: {temperature} Celsius/Fahrenheit</div>
-            <p></p>
-            <div>Soluppgång: {new Date(sunriseTime * 1000).toLocaleString('it-IT')} </div>
-            <p></p>
-            <div>Solnedgång: {new Date(sunsetTime * 1000).toLocaleString('it-IT')} </div>
+            
+            
+            <div>Wind {windGust} { speed }  </div>
+            <div>Humidity {humidity}%</div>
+            <div>Temperature {temperature} { temp }</div>
+            <div>Sunrise {new Date(sunriseTime * 1000).toLocaleString('it-IT')} </div>
+            <div>Sundown {new Date(sunsetTime * 1000).toLocaleString('it-IT')} </div>
+            
+            <button onClick={toggleTemp}>°C/°F</button>
             </div>
-            </div>
+
             
             <TestWeekWeather weekWeather = 
-            {this.state.weekWeather} />
+            {weekly} />
             <HourlyWeather hourlyWeather = 
-            {this.state.hourly} />
+            {hourly} />
+            
 
             </div>
 
